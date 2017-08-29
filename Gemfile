@@ -5,3 +5,4 @@ gem 'pry' # for debugging
 gem 'pg'
 gem 'activerecord'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'faker'
