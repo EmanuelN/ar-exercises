@@ -11,9 +11,13 @@ puts "----------"
 # Your code goes here ...
 class Employee < ActiveRecord::Base
   belongs_to :store
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates_inclusion_of :hourly_rate, :in => 40..200
+  validates_presence_of :store
 end
 
-@store1.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 12)
-@store2.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 13)
-@store1.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 17)
-@store2.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 22)
+@store1.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 60)
+@store2.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 200)
+@store1.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 100)
+@store2.employees.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, hourly_rate: 95)

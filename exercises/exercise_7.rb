@@ -10,3 +10,8 @@ puts "Exercise 7"
 puts "----------"
 
 # Your code goes here ...
+puts "Give me a store name..."
+storename = gets.chomp
+Store.create(:name => storename).errors.details.each do |error|
+  puts error
+end

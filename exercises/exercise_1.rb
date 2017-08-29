@@ -6,6 +6,16 @@ puts "----------"
 # Your code goes below here ...
 class Store < ActiveRecord::Base
   has_many :employees
+  validates :name, length: { minimum: 3 }
+  validates :annual_revenue, numericality: { greater_than: 0 }
+  validate :must_carry_clothes
+
+  def must_carry_clothes
+    if !(womens_apparel.present?) && !(mens_apparel.present?)
+      errors.add(:apparel, "Store must carry men's and/or women's clothes.")
+    end
+  end
+
 end
 
 Store.create(:name => 'Burnaby', :annual_revenue => 300000, :mens_apparel => true, :womens_apparel => true)
