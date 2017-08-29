@@ -10,4 +10,4 @@ require_relative './exercise_7'
 puts "Exercise 8"
 puts "----------"
 
-puts Employee.first.password
+puts "First employee's password: #{Employee.first.password}"

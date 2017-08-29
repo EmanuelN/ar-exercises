@@ -7,13 +7,24 @@ puts "----------"
 class Store < ActiveRecord::Base
   has_many :employees
   validates :name, length: { minimum: 3 }
-  validates :annual_revenue, numericality: { greater_than: 0 }
+  validates :annual_revenue, numericality: { greater_than_or_equal_to: 0 }
   validate :must_carry_clothes
 
   def must_carry_clothes
     if !(womens_apparel.present?) && !(mens_apparel.present?)
       errors.add(:apparel, "Store must carry men's and/or women's clothes.")
     end
+  end
+
+  before_destroy :before_destroy
+
+  private
+
+  def before_destroy
+    return true if self.employees.count == 0
+    errors.add :employees, "Cannot destroy store with employees!"
+    false
+    throw(:abort)
   end
 
 end
